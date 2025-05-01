@@ -16,16 +16,26 @@
 import { getAllInstances, type InstanceInformation } from "idb-filesystem-api";
 import { onMounted, ref } from "vue";
 
+const emits = defineEmits<{
+  (event: "change", data: InstanceInformation, index: number): void;
+}>();
+
 const instances = ref<InstanceInformation[] | undefined>();
 const activeIndex = ref<number>(0);
 
 async function init() {
   instances.value = await getAllInstances();
+  if(instances.value){
+    emits("change",  instances.value[activeIndex.value], activeIndex.value);
+  }
 }
 
 function onSelect(index: number){
   if(index === activeIndex.value) return;
   activeIndex.value = index;
+  if(instances.value){
+    emits("change",  instances.value[index], index);
+  }
 }
 
 onMounted(init);
