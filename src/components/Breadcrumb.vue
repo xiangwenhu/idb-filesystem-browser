@@ -1,12 +1,10 @@
 <template>
   <div>
-    <span
-      v-for="(item, index) in items"
-      :key="index"
-      @click="emits('change', item, index)"
-    >
-      {{ item.label || item.name }}
-      {{ index === items.length - 1 ? "" : separator || "/" }}
+    <span v-for="(item, index) in items" :key="index" class="breadcrumb-item">
+      <span class="name" @click="onClickItem(item, index)">{{
+        item.label || item.name
+      }}</span>
+      <span> {{ index === items.length - 1 ? "" : separator || "/" }} </span>
     </span>
   </div>
 </template>
@@ -27,4 +25,19 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+function onClickItem(item: BreadcrumbDataItem, index: number) {
+  emits("change", item, index);
+}
 </script>
+
+<style lang="css">
+.breadcrumb-item {
+  cursor: pointer;
+}
+
+.breadcrumb-item .name {
+  cursor: pointer;
+  color: cadetblue;
+}
+</style>

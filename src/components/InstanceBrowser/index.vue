@@ -1,20 +1,22 @@
 <template>
   <Breadcrumb :items="breadcrumbData" @change="onBreadcrumbChange"></Breadcrumb>
+  <div>
+    <DirectoryHandle :handle="currentDirHandle" :key="currentDirHandle.fullPath" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed,  onMounted, provide, ref } from "vue";
 import { IDBFileSystemDirectoryHandle } from "idb-filesystem-api";
 import Breadcrumb, { type BreadcrumbDataItem } from "../Breadcrumb.vue";
-
-type DirHandle = IDBFileSystemDirectoryHandle;
+import DirectoryHandle from "./DirectoryHandle.vue";
 
 const props = defineProps<{
-  root: DirHandle;
+  root: IDBFileSystemDirectoryHandle;
 }>();
 
-const handles = ref<DirHandle[]>([props.root]);
-const currentDirHandle = ref<DirHandle>(props.root);
+const handles = ref<IDBFileSystemDirectoryHandle[]>([props.root]);
+const currentDirHandle = ref<IDBFileSystemDirectoryHandle>(props.root);
 
 async function init() {}
 
@@ -28,6 +30,12 @@ const breadcrumbData = computed(()=> {
 })
 
 function onBreadcrumbChange(data: BreadcrumbDataItem, index: number){
-
+ handles.value = handles.value.slice(0 ,index + 1);
+ currentDirHandle.value = handles.value[index]
 }
+
+provide('enterDirectory', (handle: IDBFileSystemDirectoryHandle)=> {
+  handles.value.push(handle);
+  currentDirHandle.value = handle;
+});
 </script>
