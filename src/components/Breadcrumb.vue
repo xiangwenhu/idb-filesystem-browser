@@ -1,5 +1,6 @@
 <template>
   <div>
+    <slot></slot>
     <span v-for="(item, index) in items" :key="index" class="breadcrumb-item">
       <span class="name" @click="onClickItem(item, index)">{{
         item.label || item.name
@@ -38,6 +39,8 @@ function onClickItem(item: BreadcrumbDataItem, index: number) {
 
 .breadcrumb-item .name {
   cursor: pointer;
-  color: cadetblue;
+  /* color: cadetblue; */
+  color: rgb(0, 0, 238);
+  font-size: 16px;
 }
 </style>

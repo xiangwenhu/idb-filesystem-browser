@@ -1,7 +1,11 @@
 <template>
-  <Instances @change="onSelectInstance" />
+  <div class="card">
+    <Instances @change="onSelectInstance" />
+  </div>
   <!-- <Test /> -->
-  <InstanceBrowser v-if="!state.loading && rootDir" :root="rootDir" />
+  <div class="card">
+    <InstanceBrowser v-if="!state.loading && rootDir" :root="rootDir" />
+  </div>
 </template>
 
 <script setup lang="ts">

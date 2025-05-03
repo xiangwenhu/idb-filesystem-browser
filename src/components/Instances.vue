@@ -53,9 +53,12 @@ onMounted(init);
   display: inline-block;
   padding: 6px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .idb-fs-item.active {
-  background-color: rgb(64, 128, 255);
+  /* background-color: rgb(64, 128, 255); */
+  /* background-color: #18a058; */
+  color: #18a058;
 }
 </style>

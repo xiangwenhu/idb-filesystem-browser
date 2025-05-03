@@ -1,7 +1,7 @@
 <template>
-  <figure>
+  <figure class="handle-tem-container">
     <img src="../../assets/images/file.png" class="file" />
-    <p>{{ handle.name }}</p>
+    <p class="name" :title="handle.name">{{ handle.name }}</p>
   </figure>
 </template>
 

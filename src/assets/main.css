@@ -1,7 +1,7 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
@@ -19,4 +19,15 @@ a,
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
+}
+
+:root {
+  --border-color: #dcdfe6;
+  --border-radius-base: 4px;
+}
+
+.card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-base);
+  padding: 16px;
 }

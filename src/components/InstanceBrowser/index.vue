@@ -1,6 +1,8 @@
 <template>
-  <Breadcrumb :items="breadcrumbData" @change="onBreadcrumbChange"></Breadcrumb>
-  <div>
+  <div class="card">
+    <Breadcrumb :items="breadcrumbData" @change="onBreadcrumbChange"> 目录： </Breadcrumb>
+  </div>
+  <div class="card">
     <DirectoryHandle :handle="currentDirHandle" :key="currentDirHandle.fullPath" />
   </div>
 </template>
@@ -39,3 +41,18 @@ provide('enterDirectory', (handle: IDBFileSystemDirectoryHandle)=> {
   currentDirHandle.value = handle;
 });
 </script>
+
+<style lang="css">
+.handle-tem-container {
+  width: 6rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.handle-tem-container .name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+</style>

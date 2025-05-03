@@ -1,7 +1,7 @@
 <template>
-  <figure @dblclick="onEnterDirectory">
+  <figure @dblclick="onEnterDirectory" class="handle-tem-container">
     <img src="../../assets/images/folder.png" class="folder" />
-    <p>{{ handle.name }}</p>
+    <p class="name" :title="handle.name">{{ handle.name }}</p>
   </figure>
 </template>
 
@@ -40,8 +40,8 @@ function onEnterDirectory() {
 
 <style scoped>
 .folder {
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
   cursor: pointer;
 }
 </style>
