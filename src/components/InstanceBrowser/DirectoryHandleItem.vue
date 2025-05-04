@@ -1,13 +1,41 @@
 <template>
-  <figure @dblclick="onEnterDirectory" class="handle-tem-container">
-    <img src="../../assets/images/folder.png" class="folder" />
-    <p class="name" :title="handle.name">{{ handle.name }}</p>
+  <figure
+    @dblclick="onEnterDirectory"
+    class="handle-tem-container"
+    :data-path="handle.fullPath"
+    :data-type="menuType"
+  >
+    <img
+      src="../../assets/images/folder.png"
+      class="folder"
+      :data-path="handle.fullPath"
+      :data-type="menuType"
+    />
+    <p
+      class="name"
+      :title="handle.name"
+      :data-path="handle.fullPath"
+      :data-type="menuType"
+    >
+      {{ handle.name }}
+    </p>
   </figure>
 </template>
 
 <script setup lang="ts">
+import { EnumContextMenuType } from "@/types";
 import type { IDBFileSystemDirectoryHandle } from "idb-filesystem-api";
 import { onMounted, reactive, inject } from "vue";
+
+const menuType = EnumContextMenuType.FOLDER;
+
+const state = reactive<{
+  showContextMenu: boolean;
+  loading: boolean;
+}>({
+  showContextMenu: false,
+  loading: true,
+});
 
 const enterDirectory:
   | ((handle: IDBFileSystemDirectoryHandle) => void)
@@ -16,12 +44,6 @@ const enterDirectory:
 const props = defineProps<{
   handle: IDBFileSystemDirectoryHandle;
 }>();
-
-const state = reactive<{
-  loading: boolean;
-}>({
-  loading: true,
-});
 
 async function init() {}
 

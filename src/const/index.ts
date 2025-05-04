@@ -1,39 +1,39 @@
+import { EnumContextMenCmd, EnumContextMenuType, type ContextMenuItem } from "@/types";
 
-
-export const ContextMenuItems = [{
-    cmd: FSCMD.CREATE_FOLDER,
+export const ContextMenuItems: ContextMenuItem[] = [{
+    cmd: EnumContextMenCmd.CREATE_FOLDER,
     name: '创建文件夹',
-    types: [0]
+    types: [EnumContextMenuType.DEFAULT]
 }, {
-    cmd: FSCMD.CRETAE_FILE,
+    cmd: EnumContextMenCmd.CREATE_FILE,
     name: '创建文件',
-    types: [0]
+    types: [EnumContextMenuType.DEFAULT]
 }, {
-    cmd: FSCMD.REFRESH,
+    cmd: EnumContextMenCmd.REFRESH,
     name: '刷新',
-    types: [0]
+    types: [EnumContextMenuType.DEFAULT]
 }, {
-    cmd: FSCMD.PREVIEW,
+    cmd: EnumContextMenCmd.PREVIEW,
     name: '预览',
-    types: [1]
+    types: [EnumContextMenuType.FILE]
 }, {
-    cmd: FSCMD.PRINT,
+    cmd: EnumContextMenCmd.PRINT,
     name: '打印',
-    types: [1]
+    types: [EnumContextMenuType.FILE]
 }, {
-    cmd: FSCMD.RENAME,
+    cmd: EnumContextMenCmd.RENAME,
     name: '重命名',
-    types: [1, 2]
+    types: [EnumContextMenuType.FILE, EnumContextMenuType.FOLDER]
 }, {
-    cmd: FSCMD.DOWNLOAD,
+    cmd: EnumContextMenCmd.DOWNLOAD,
     name: '下载',
-    types: [1]
+    types: [EnumContextMenuType.FILE]
 }, {
-    cmd: FSCMD.DELETE,
+    cmd: EnumContextMenCmd.DELETE,
     name: '删除',
-    types: [1, 2]
+    types: [EnumContextMenuType.FILE, EnumContextMenuType.FOLDER]
 }, {
-    cmd: FSCMD.PROPERTY,
+    cmd: EnumContextMenCmd.VIEW_PROPERTY,
     name: '属性',
-    types: [1, 2]
+    types: [EnumContextMenuType.FILE, EnumContextMenuType.FOLDER]
 }]

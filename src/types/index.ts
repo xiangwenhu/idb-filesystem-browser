@@ -2,46 +2,53 @@
  * 右键菜单类型
  */
 export enum EnumContextMenuType {
-    Default = 0,
-    File = 1,
-    Folder = 2
+    DEFAULT = 'DEFAULT',
+    FILE = 'FILE',
+    FOLDER = 'FOLDER'
 }
 
 export enum EnumContextMenCmd {
     /**
      * 创建文件夹
      */
-    CREATE_FOLDER = 1,
+    CREATE_FOLDER = 'CREATE_FOLDER',
     /**
      * 创建文件
      */
-    CREATE_FILE = 2,
+    CREATE_FILE = 'CREATE_FILE',
     /**
      * 刷新
      */
-    REFRESH = 3,
+    REFRESH = 'REFRESH',
     /**
      * 查看
      */
-    PREVIEW = 4,
+    PREVIEW = 'PREVIEW',
     /**
      * 打印
      */
-    PRINT = 5,
+    PRINT = 'PRINT',
     /**
      * 重命名
      */
-    RENAME = 6,
+    RENAME = 'RENAME',
     /**
      * 下载
      */
-    DOWNLOAD = 7,
+    DOWNLOAD = 'DOWNLOAD',
     /**
      * 删除
      */
-    DELETE = 8,
+    DELETE = 'DELETE',
     /**
      * 查看属性
      */
-    VIEW_PROPERTY = 9
+    VIEW_PROPERTY = 'VIEW_PROPERTY'
+}
+
+
+export interface ContextMenuItem {
+    cmd: EnumContextMenCmd;
+    name: string;
+    types: EnumContextMenuType[];
 }
