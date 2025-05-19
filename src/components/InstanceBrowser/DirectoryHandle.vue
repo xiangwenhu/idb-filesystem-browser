@@ -17,6 +17,8 @@ import DirectoryHandleItem from "./DirectoryHandleItem.vue";
 import FileHandleItem from "./FileHandleItem.vue";
 import { asyncIteratorToArray } from "@/util";
 import { addEvent } from "@/util/message";
+import CMDHandles from "./CMDHandle";
+import type { EnumContextMenCmd, EnumContextMenuType } from "@/types";
 
 const state = reactive<{
   loading: boolean;
@@ -32,13 +34,33 @@ const props = defineProps<{
 
 let unsubscribe: () => void | undefined;
 
-function onHandleCmd(data: {
-  type: string;
-  cmd: string;
+async function onHandleCmd(data: {
+  type: EnumContextMenuType;
+  cmd: EnumContextMenCmd;
   fullPath: string;
   params: unknown[];
 }) {
+  const handle = list.value?.find(
+    (item) => item.fullPath === data.fullPath
+  ) as IDBFileSystemFileHandle;
   console.log("onHandleCmd:", data);
+
+  const handleParams = {
+    ...data,
+    handle,
+  };
+
+  const cmdHandles = CMDHandles[data.type];
+  if (!cmdHandles) return;
+
+  const cmdHandle = cmdHandles[data.cmd];
+  if (!cmdHandle) return;
+
+  await cmdHandle.call(null, handleParams);
+
+  console.log("handleParams:", handleParams);
+
+  init();
 }
 
 async function init() {
