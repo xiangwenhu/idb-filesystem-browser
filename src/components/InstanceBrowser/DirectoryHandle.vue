@@ -60,14 +60,21 @@ async function onHandleCmd(data: {
 
   console.log("handleParams:", handleParams);
 
-  init();
+  getEntries();
 }
 
 async function init() {
+  getEntries();
+  subscribe();
+}
+
+async function getEntries() {
   const handles = await props.handle.values();
   list.value = await asyncIteratorToArray(handles);
   console.log("handles:", list.value);
+}
 
+function subscribe() {
   unsubscribe = addEvent("handle-cmd", onHandleCmd);
 }
 

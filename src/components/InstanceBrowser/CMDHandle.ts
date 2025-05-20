@@ -16,25 +16,35 @@ interface CMDHandler {
 
 const CMDFileHandles: Record<string, CMDHandler> = {
     async [EnumContextMenCmd.DOWNLOAD]({ handle }) {
-        if (handle instanceof IDBFileSystemFileHandle) {
-            handle.getFile().then((file) => {
-                const url = URL.createObjectURL(file);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = file.name;
-                a.click();
-                URL.revokeObjectURL(url);
-            });
-        }
+
+        const fileHandle = handle as IDBFileSystemFileHandle;
+        fileHandle.getFile().then((file) => {
+            const url = URL.createObjectURL(file);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = file.name;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
     },
     async [EnumContextMenCmd.DELETE]({ handle }) {
-        if (handle instanceof IDBFileSystemFileHandle) {
-            await handle.remove();
-        }
+        const fileHandle = handle as IDBFileSystemFileHandle;
+        await fileHandle.remove();
+    },
+    async [EnumContextMenCmd.PREVIEW]({ handle }) {
+        const fileHandle = handle as IDBFileSystemFileHandle;
+        const file = await fileHandle.getFile();
+        const url = URL.createObjectURL(file);
+        window.open(url, "_blank");
     }
 }
 
 const CMDFolderHandles: Record<string, CMDHandler> = {
+    async [EnumContextMenCmd.DELETE]({ handle }) {
+        const fileHandle = handle as IDBFileSystemDirectoryHandle;
+        await fileHandle.remove()
+    }
 }
 
 
